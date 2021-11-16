@@ -28,4 +28,20 @@ exports.login = async (req, res) => {
          }   
 }
 
+//READ ALL RECORDS function
+exports.getUsers = async (req, res) => {
+    try {
+    
+      const userList = await User.find({}); //find all users, store result in userList
+      console.log("Successfully read database."); //console log to tell user of success
+      res.status(200).send({ userList }); //send the userlist to the result part of the endpoint
+    
+    } catch (error) {
+      console.log(error);
+      res
+        .status(418)
+        .send({ message: "Reading database went wrong. Check server logs." }); //response if fails.
+    }
+  };
+
 //UPDATE FUNCTION
