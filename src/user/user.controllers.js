@@ -45,3 +45,20 @@ exports.getUsers = async (req, res) => {
   };
 
 //UPDATE FUNCTION
+exports.editUsers = async (req, res) => {
+    try {
+    
+    const filterField = req.user.username; //need to ensure this is the username being searched
+    const updateField = req.user; //need to figure out what to pass as an update
+
+      const userList = await User.updateOne(/*filter field*/ req.user, /*update value*/ update) //update user
+      console.log("Successfully updated database! "); //console log to tell user of success
+      res.status(200).send({ userList }); //send the userlist to the result part of the endpoint
+    
+    } catch (error) {
+      console.log(error);
+      res
+        .status(418)
+        .send({ message: "Reading database went wrong. Check server logs." }); //response if fails.
+    }
+  };
