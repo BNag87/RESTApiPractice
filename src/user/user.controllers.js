@@ -1,6 +1,6 @@
 const User = require("./user.model");
 
-
+// Hello. I was added. Please add me to your repo
 //CREATE function
 exports.addUser = async (req, res) => {
     try{
