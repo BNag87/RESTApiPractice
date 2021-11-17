@@ -48,12 +48,13 @@ exports.getUsers = async (req, res) => {
 exports.editUsers = async (req, res) => {
     try {
     
-    const filterField = req.user.username; //need to ensure this is the username being searched
-    const updateField = req.user; //need to figure out what to pass as an update
+    const filterField = req.body.userName; //need to ensure this is the username being searched
 
-      const userList = await User.updateOne(/*filter field*/ req.user, /*update value*/ update) //update user
+    const updateField = req.body.email; //need to figure out what to pass as an update
+
+      const userList = await User.updateOne(/*filter field*/ {username: filterField}, /*update value*/ {$set: {email: updateField}}, {new: true}) //update user
       console.log("Successfully updated database! "); //console log to tell user of success
-      res.status(200).send({ userList }); //send the userlist to the result part of the endpoint
+      res.status(200).send({ message: "Managed to update user email!" }); //send the userlist to the result part of the endpoint
     
     } catch (error) {
       console.log(error);
